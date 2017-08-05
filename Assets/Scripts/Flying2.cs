@@ -12,8 +12,9 @@ public class Flying2 : MonoBehaviour
     public float crossSection = 0.1f;
     public float dragConstant = 1f;
     public float drag;
-    public float flapStrengthWingsOpen = 0.05f;
+    public float flapStrengthWingsOpen = 0.03f;
     public float actualFlapStrength;
+	public float upFlapStrength = 0.2f;
     private float prevAngle;
     public float angle
     {
@@ -50,7 +51,7 @@ public class Flying2 : MonoBehaviour
         direction = Vector3.Cross(Vector3.up, leftToRight).normalized;
         float deltaAngle = Mathf.Abs(angle - prevAngle);
 		if(prevAngle < angle) {//make upflap weaker
-			deltaAngle *= 0.5f;
+			deltaAngle *= upFlapStrength;
 		}
         prevAngle = angle;
         crossSection = leftToRight.magnitude * 0.1f;
