@@ -1,17 +1,17 @@
 fileFormatVersion: 2
 guid: 640abbf24a5398b48b7600ee4b34bf0c
-timeCreated: 1501953126
+timeCreated: 1501957241
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: pCube142
-    100002: //RootNode
-    400000: pCube142
-    400002: //RootNode
-    2300000: pCube142
-    3300000: pCube142
-    4300000: pCube142
+    100000: //RootNode
+    100002: Street_mark:pCube142
+    400000: //RootNode
+    400002: Street_mark:pCube142
+    2300000: Street_mark:pCube142
+    3300000: Street_mark:pCube142
+    4300000: Street_mark:pCube142
   materials:
     importMaterials: 1
     materialName: 0
