@@ -30,6 +30,16 @@ public class Flying2 : MonoBehaviour
         get { return right.transform.position - left.transform.position; }
     }
 
+	public Vector3 wingForward
+	{
+		get 
+		{
+			Vector3 leftForward = left.transform.forward - left.transform.right;
+			Vector3 rightForward = right.transform.forward - right.transform.right;
+			return Vector3.Lerp(leftForward, rightForward, 0.5f).normalized;
+		}
+	}
+
     private Vector3 direction;
     private float yawSensitivity = 0.003f;
 
@@ -59,6 +69,12 @@ public class Flying2 : MonoBehaviour
         drag = Mathf.Clamp(speed * speed * crossSection * dragConstant, 1f, 1000f);
         speed = Mathf.Clamp(speed - drag * Time.deltaTime, 0f, maxSpeed);
         speed = Mathf.Clamp(speed + deltaAngle * actualFlapStrength, 0f, maxSpeed);
-        transform.Translate(direction * speed * Time.deltaTime, Space.World);
+
+		//pitch and dive
+		
+        
+		
+		
+		transform.Translate(direction * speed * Time.deltaTime, Space.World);
     }
 }
