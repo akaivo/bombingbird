@@ -7,7 +7,7 @@ public class Flying2 : MonoBehaviour
     public GameObject head;
     public GameObject left;
     public GameObject right;
-    public float speed = 0f;
+    public Vector3 speed;
     public float maxSpeed = 20f;
     public float crossSection = 0.1f;
     public float dragConstant = 1f;
@@ -40,8 +40,9 @@ public class Flying2 : MonoBehaviour
 		}
 	}
 
-    private Vector3 direction;
+    private Vector3 yawDirection;
     private float yawSensitivity = 0.003f;
+    public float diveAccel = 1;
 
     void Start()
     {
@@ -50,31 +51,51 @@ public class Flying2 : MonoBehaviour
     void Update()
     {
         //roll turning
-		direction = Vector3.Cross(Vector3.up, leftToRight).normalized;
+		yawDirection = Vector3.Cross(Vector3.up, leftToRight).normalized;
         Vector3 toTheRight = Vector3.ProjectOnPlane(leftToRight, Vector3.up);
 		float roll = Vector3.Angle(leftToRight, toTheRight);
-        float rollSign = (Vector3.Dot(direction, Vector3.Cross(leftToRight, toTheRight)) < 0) ? -1 : 1;
-        float deltaYaw = roll * roll * speed * yawSensitivity * rollSign;
+        float rollSign = (Vector3.Dot(yawDirection, Vector3.Cross(leftToRight, toTheRight)) < 0) ? -1 : 1;
+        float deltaYaw = roll * roll * speed.magnitude * yawSensitivity * rollSign;
         transform.RotateAround(head.transform.position, Vector3.up, deltaYaw * Time.deltaTime);
+        yawDirection = Vector3.Cross(Vector3.up, leftToRight).normalized;//calculate again after rotating
+        
+        //dive
+		toTheRight = Vector3.ProjectOnPlane(leftToRight, Vector3.up);
+        Vector3 pitchDirection = Vector3.ProjectOnPlane(wingForward, toTheRight).normalized;
+        float diveAngle = Vector3.Angle(Vector3.down, pitchDirection);
+        if(diveAngle < 90f){
+            float diveMultiplier = Mathf.Cos(diveAngle * Mathf.PI / 180);
+            Debug.Log(Mathf.Cos(diveAngle * Mathf.PI / 180));
+            speed += Vector3.down * diveMultiplier * diveAccel * Time.deltaTime;
+            speed += yawDirection * -speed.y * Time.deltaTime;
+        } else {
+            diveAngle -= 90;
+            float riseMultiplier = Mathf.Sin(diveAngle * Mathf.PI / 180);
+            speed += Vector3.up * riseMultiplier * speed.magnitude * Time.deltaTime;
+        }
+
 
 		//flap and speed
-        direction = Vector3.Cross(Vector3.up, leftToRight).normalized;
         float deltaAngle = Mathf.Abs(angle - prevAngle);
 		if(prevAngle < angle) {//make upflap weaker
 			deltaAngle *= upFlapStrength;
 		}
         prevAngle = angle;
-        crossSection = leftToRight.magnitude * 0.1f;
         actualFlapStrength = flapStrengthWingsOpen * leftToRight.magnitude * leftToRight.magnitude;
-        drag = Mathf.Clamp(speed * speed * crossSection * dragConstant, 1f, 1000f);
-        speed = Mathf.Clamp(speed - drag * Time.deltaTime, 0f, maxSpeed);
-        speed = Mathf.Clamp(speed + deltaAngle * actualFlapStrength, 0f, maxSpeed);
-
-		//pitch and dive
-		
         
+        speed = Vector3.ClampMagnitude(speed + yawDirection * deltaAngle * actualFlapStrength, maxSpeed);//flapping
+
+        crossSection = leftToRight.magnitude * 1f; //wingspan open or closed
+		float dragAngle = Vector3.Angle(speed, pitchDirection);
+        if(dragAngle < 90f){//
+            Debug.Log(Mathf.Sin(dragAngle * Mathf.PI / 180));
+            crossSection *= Mathf.Sin(dragAngle * Mathf.PI / 180);
+        }
+
+        drag = Mathf.Clamp(speed.magnitude * speed.magnitude * crossSection * dragConstant, 1f, 1000f);
+        speed = Vector3.ClampMagnitude(speed - speed.normalized * drag * Time.deltaTime, maxSpeed);
 		
 		
-		transform.Translate(direction * speed * Time.deltaTime, Space.World);
+		transform.Translate(speed * Time.deltaTime, Space.World);
     }
 }
