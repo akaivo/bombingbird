@@ -200,4 +200,9 @@ public class Flying : MonoBehaviour
     {
         return wingForwardSmoothed;
     }
+
+    public float GetSpeed()
+    {
+        return speed;
+    }
 }

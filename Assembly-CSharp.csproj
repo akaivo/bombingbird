@@ -228,6 +228,8 @@
      <Compile Include="Assets\Scripts\Flying.cs" />
      <Compile Include="Assets\Scripts\InputEvents.cs" />
      <Compile Include="Assets\Scripts\ShootProjectile.cs" />
+     <Compile Include="Assets\Scripts\WindAudioFast.cs" />
+     <Compile Include="Assets\Scripts\WindAudioSlow.cs" />
      <Compile Include="Assets\Scripts\WingRollPitchController.cs" />
      <Compile Include="Assets\Scripts\WingTracker.cs" />
      <Compile Include="Assets\Scripts\WingYawController.cs" />
