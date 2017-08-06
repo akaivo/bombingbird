@@ -203,6 +203,7 @@
      <Compile Include="Assets\Scripts\Flying.cs" />
      <Compile Include="Assets\Scripts\InputEvents.cs" />
      <Compile Include="Assets\Scripts\ShootProjectile.cs" />
+     <Compile Include="Assets\Scripts\WingPitchController.cs" />
      <Compile Include="Assets\Scripts\WingRollController.cs" />
      <Compile Include="Assets\Scripts\WingYawController.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />

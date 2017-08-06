@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WingRollController : MonoBehaviour {
+	public Flying flying;
 	public GameObject torso;
 	public GameObject leftHand;
 	public GameObject rightHand;
@@ -20,5 +21,10 @@ public class WingRollController : MonoBehaviour {
 		leftWing.transform.localRotation = Quaternion.AngleAxis(rollAngleLeft, Vector3.forward);
 		rightWing.transform.localRotation = Quaternion.AngleAxis(rollAngleRight, Vector3.forward);
 		rightWing.transform.localRotation *= Quaternion.AngleAxis(180, Vector3.forward);
+
+		float angle = Vector3.Angle(flying.GetHeading(), flying.GetWingForward());
+		if(flying.GetWingForward().y < 0) angle *= -1;
+		leftWing.transform.localRotation *= Quaternion.AngleAxis(angle, Vector3.left);
+		rightWing.transform.localRotation *= Quaternion.AngleAxis(angle, Vector3.right);
 	}
 }

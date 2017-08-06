@@ -195,4 +195,9 @@ public class Flying : MonoBehaviour
     {
         return heading;
     }
+
+    public Vector3 GetWingForward()
+    {
+        return wingForwardSmoothed;
+    }
 }
