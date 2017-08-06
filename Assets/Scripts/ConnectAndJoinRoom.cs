@@ -13,6 +13,9 @@ public class ConnectAndJoinRoom : Photon.MonoBehaviour
 
     public byte Version = 1;
 
+    public GameObject leftWing;
+    public GameObject rightWing;
+
     /// <summary>if we don't want to connect in Start(), we have to "remember" if we called ConnectUsingSettings()</summary>
     private bool ConnectInUpdate = true;
 
@@ -57,5 +60,9 @@ public class ConnectAndJoinRoom : Photon.MonoBehaviour
     public void OnJoinedRoom()
     {
         Debug.Log("OnJoinedRoom() called by PUN. Now this client is in a room. From here on, your game would be running. For reference, all callbacks are listed in enum: PhotonNetworkingMessage");
+        GameObject left = PhotonNetwork.Instantiate("NetworkedWing", new Vector3(0, 0, 0), Quaternion.identity, 0);
+        left.GetComponent<WingTracker>().localWing = leftWing;
+        GameObject right = PhotonNetwork.Instantiate("NetworkedWing", new Vector3(0, 0, 0), Quaternion.identity, 0);
+        right.GetComponent<WingTracker>().localWing = rightWing;
     }
 }
