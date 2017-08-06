@@ -88,6 +88,7 @@ public class Flying2 : MonoBehaviour
     public int avgParam = 4;//seems to be good balance between smoothing and delay when using simple moving average;
     private Vector3 wingForwardSmoothed;
     private Queue wingForwards = new Queue(4);
+    public GameObject torsoGameObject;
 
     void Start()
 
@@ -155,6 +156,8 @@ public class Flying2 : MonoBehaviour
         wingForwards.Enqueue(wingForward);
         while (wingForwards.Count > avgParam) wingForwards.Dequeue();
         wingForwardSmoothed = GetMeanVector(wingForwards);
+
+        //torsoGameObject.transform.position = head.transform.position + Vector3.down*0.3f;
     }
 
     private Vector3 GetMeanVector(Queue positions)
