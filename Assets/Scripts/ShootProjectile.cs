@@ -16,6 +16,8 @@ public class ShootProjectile : Photon.MonoBehaviour {
 	private bool charging = false;
 	private Vector3 previousPosition;
 	private Vector3 initialVelocity;
+	public AudioSource squeezesound;
+	public AudioSource shitSound;
 
 	void OnEnable()
 	{
@@ -42,12 +44,16 @@ public class ShootProjectile : Photon.MonoBehaviour {
 	
     private void startCharging(object sender, EventArgs e)
     {
+		shitSound.Stop();
         mass = minMass;
 		charging = true;
+		squeezesound.Play();
     }
 
 	private void release(object sender, EventArgs e)
     {
+		squeezesound.Stop();
+		shitSound.Play();
 		charging = false;
 		photonView.RPC("makeShitHappen", PhotonTargets.All, torso.transform.position, initialVelocity, mass);
     }

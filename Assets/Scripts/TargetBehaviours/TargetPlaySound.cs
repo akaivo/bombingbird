@@ -5,7 +5,6 @@ using UnityEngine;
 public class TargetPlaySound : MonoBehaviour {
 
 	public AudioClip[] clips;
-	private int current = 0;
 	List<AudioSource> playingSources = new List<AudioSource>();
 	void OnCollisionEnter(Collision other)
 	{
@@ -20,17 +19,15 @@ public class TargetPlaySound : MonoBehaviour {
         if(clips.Length > 0)
 		{
 			AudioSource newSource = gameObject.AddComponent<AudioSource>();
-			newSource.clip = clips[current];
+			int index = Random.Range(0,clips.Length);
+			newSource.clip = clips[index];
+			if(index == 0) newSource.volume = 0.3f;
 			newSource.loop = false;
 			newSource.Play();
-			newSource.maxDistance = 50f;
+			newSource.maxDistance = 100f;
 			newSource.spatialize = true;
-			newSource.spatialBlend = .9f;
+			newSource.spatialBlend = .7f;
 			playingSources.Add(newSource);
-			current++;
-			if(current > clips.Length - 1){
-				current = 0;
-			}
 		}
     }
 
