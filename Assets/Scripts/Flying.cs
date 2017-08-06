@@ -6,7 +6,7 @@ using UnityEngine;
 
 
 
-public class Flying2 : MonoBehaviour
+public class Flying : MonoBehaviour
 
 {
 
@@ -89,7 +89,8 @@ public class Flying2 : MonoBehaviour
     private Vector3 wingForwardSmoothed;
     private Queue wingForwards = new Queue(4);
     public GameObject torsoGameObject;
-
+    private Vector3 heading;
+    
     void Start()
 
     {
@@ -121,7 +122,7 @@ public class Flying2 : MonoBehaviour
         //flap and speed
 
         direction = Vector3.Cross(Vector3.up, leftToRight).normalized;
-
+        heading = direction;
         float deltaAngle = Mathf.Abs(angle - prevAngle);
 
         if (prevAngle < angle)
@@ -188,5 +189,10 @@ public class Flying2 : MonoBehaviour
 
         return new Vector3(x / positions.Count, y / positions.Count, z / positions.Count);
 
+    }
+
+    public Vector3 GetHeading()
+    {
+        return heading;
     }
 }
