@@ -200,10 +200,12 @@
      <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
      <Compile Include="Assets\Scripts\ConnectAndJoinRoom.cs" />
      <Compile Include="Assets\Scripts\ExampleClass.cs" />
-     <Compile Include="Assets\Scripts\Flying2.cs" />
+     <Compile Include="Assets\Scripts\Flying.cs" />
      <Compile Include="Assets\Scripts\InputEvents.cs" />
      <Compile Include="Assets\Scripts\ShootProjectile.cs" />
-     <Compile Include="Assets\Scripts\WingController.cs" />
+     <Compile Include="Assets\Scripts\WingPitchController.cs" />
+     <Compile Include="Assets\Scripts\WingRollController.cs" />
+     <Compile Include="Assets\Scripts\WingYawController.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_Teleporter.cs" />
