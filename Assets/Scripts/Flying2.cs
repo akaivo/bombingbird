@@ -157,7 +157,7 @@ public class Flying2 : MonoBehaviour
         while (wingForwards.Count > avgParam) wingForwards.Dequeue();
         wingForwardSmoothed = GetMeanVector(wingForwards);
 
-        //torsoGameObject.transform.position = head.transform.position + Vector3.down*0.3f;
+        torsoGameObject.transform.position = head.transform.position + Vector3.down*0.3f;
     }
 
     private Vector3 GetMeanVector(Queue positions)
