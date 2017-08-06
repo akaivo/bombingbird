@@ -26,7 +26,7 @@ public class TargetPlaySound : MonoBehaviour {
 			newSource.Play();
 			newSource.maxDistance = 100f;
 			newSource.spatialize = true;
-			newSource.spatialBlend = .7f;
+			newSource.spatialBlend = .5f;
 			playingSources.Add(newSource);
 		}
     }

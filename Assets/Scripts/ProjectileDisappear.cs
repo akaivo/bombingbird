@@ -11,7 +11,9 @@ public class ProjectileDisappear : MonoBehaviour {
 	
 	void OnCollisionEnter(Collision other)
 	{
-		Destroy(gameObject);
+		if(other.gameObject.tag != "shit"){
+			Destroy(gameObject);
+		}
 	}
 	
 	private IEnumerable TimeOutDestroy()
