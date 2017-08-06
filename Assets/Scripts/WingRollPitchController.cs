@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WingRollController : MonoBehaviour {
+public class WingRollPitchController : MonoBehaviour {
 	public Flying flying;
 	public GameObject torso;
 	public GameObject leftHand;
