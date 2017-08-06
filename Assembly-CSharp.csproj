@@ -227,7 +227,10 @@
      <Compile Include="Assets\Scripts\ExampleClass.cs" />
      <Compile Include="Assets\Scripts\Flying.cs" />
      <Compile Include="Assets\Scripts\InputEvents.cs" />
+     <Compile Include="Assets\Scripts\ProjectileDisappear.cs" />
      <Compile Include="Assets\Scripts\ShootProjectile.cs" />
+     <Compile Include="Assets\Scripts\TargetBehaviours\TargetDisappear.cs" />
+     <Compile Include="Assets\Scripts\TargetBehaviours\TargetPlaySound.cs" />
      <Compile Include="Assets\Scripts\WindAudioFast.cs" />
      <Compile Include="Assets\Scripts\WindAudioSlow.cs" />
      <Compile Include="Assets\Scripts\WingRollPitchController.cs" />
@@ -335,6 +338,7 @@
      <Compile Include="Assets\SteamVR\Scripts\SteamVR_TrackedObject.cs" />
      <Compile Include="Assets\SteamVR\Scripts\SteamVR_UpdatePoses.cs" />
      <Compile Include="Assets\SteamVR\Scripts\SteamVR_Utils.cs" />
+     <Compile Include="Assets\spawnPrefab.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
      <None Include="Assets\SteamVR\Resources\SteamVR_Fade.shader" />

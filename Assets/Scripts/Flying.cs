@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 
 using System.Collections.Generic;
 
@@ -25,6 +26,8 @@ public class Flying : MonoBehaviour
     public float dragConstant = 1f;
 
     public float drag;
+
+    
 
     public float flapStrengthWingsOpen = 0.05f;
 
@@ -159,6 +162,9 @@ public class Flying : MonoBehaviour
         wingForwardSmoothed = GetMeanVector(wingForwards);
 
         torsoGameObject.transform.position = head.transform.position + Vector3.down*0.3f;
+        if(transform.position.y < -5) {
+            transform.position += Vector3.up * 50f;
+        }
     }
 
     private Vector3 GetMeanVector(Queue positions)
@@ -204,5 +210,9 @@ public class Flying : MonoBehaviour
     public float GetSpeed()
     {
         return speed;
+    }
+    public float GetAltitude()
+    {
+        return head.transform.position.y;
     }
 }
