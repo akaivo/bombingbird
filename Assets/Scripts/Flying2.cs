@@ -80,7 +80,14 @@ public class Flying2 : MonoBehaviour
 
     private float yawSensitivity = 0.003f;
 
-    public GameObject debug;
+    public float brakingConstant = 2f;
+    public float diveConstant = 2f;
+
+    //smoothing
+
+    public int avgParam = 4;//seems to be good balance between smoothing and delay when using simple moving average;
+    private Vector3 wingForwardSmoothed;
+    private Queue wingForwards = new Queue(4);
 
     void Start()
 
@@ -129,16 +136,54 @@ public class Flying2 : MonoBehaviour
 
         actualFlapStrength = flapStrengthWingsOpen * leftToRight.magnitude * leftToRight.magnitude;
 
-        drag = Mathf.Clamp(speed * speed * crossSection * dragConstant, 1f, 1000f);
+        drag = Mathf.Clamp(speed * speed * crossSection * dragConstant, 0.003f, 1000f);
+        Vector3 upDown = Vector3.Project(wingForwardSmoothed, Vector3.up);
+        direction += upDown;
+        if(upDown.y > 0){
+            drag += upDown.magnitude * upDown.magnitude * brakingConstant; 
+        } else {
+            speed += upDown.magnitude * diveConstant;
+        }
 
-        speed = Mathf.Clamp(speed - drag * Time.deltaTime, 0f, maxSpeed);
+        speed = Mathf.Clamp(speed - drag, 0f, maxSpeed);
 
         speed = Mathf.Clamp(speed + deltaAngle * actualFlapStrength, 0f, maxSpeed);
-
-        direction += Vector3.ProjectOnPlane(wingForward, toTheRightParallelToGround);
+        
 
         transform.Translate(direction * speed * Time.deltaTime, Space.World);
 
-        debug.transform.position = right.transform.position + wingForward;
+        wingForwards.Enqueue(wingForward);
+        while (wingForwards.Count > avgParam) wingForwards.Dequeue();
+        wingForwardSmoothed = GetMeanVector(wingForwards);
+    }
+
+    private Vector3 GetMeanVector(Queue positions)
+
+    {
+
+        if (positions.Count == 0)
+
+            return Vector3.zero;
+
+        float x = 0f;
+
+        float y = 0f;
+
+        float z = 0f;
+
+        foreach (Vector3 pos in positions)
+
+        {
+
+            x += pos.x;
+
+            y += pos.y;
+
+            z += pos.z;
+
+        }
+
+        return new Vector3(x / positions.Count, y / positions.Count, z / positions.Count);
+
     }
 }
