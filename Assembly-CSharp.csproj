@@ -201,7 +201,8 @@
      <Compile Include="Assets\Scripts\ConnectAndJoinRoom.cs" />
      <Compile Include="Assets\Scripts\ExampleClass.cs" />
      <Compile Include="Assets\Scripts\Flying2.cs" />
-     <Compile Include="Assets\Scripts\TorsoPosition.cs" />
+     <Compile Include="Assets\Scripts\InputEvents.cs" />
+     <Compile Include="Assets\Scripts\ShootProjectile.cs" />
      <Compile Include="Assets\Scripts\WingController.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
@@ -380,11 +381,11 @@
  <Reference Include="UnityEngine.VR">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
- <Reference Include="websocket-sharp">
- <HintPath>C:/Users/Admin/Documents/BombingBird/Assets/Plugins/WebSocket/websocket-sharp.dll</HintPath>
- </Reference>
  <Reference Include="Photon3Unity3D">
  <HintPath>C:/Users/Admin/Documents/BombingBird/Assets/Plugins/Photon3Unity3D.dll</HintPath>
+ </Reference>
+ <Reference Include="websocket-sharp">
+ <HintPath>C:/Users/Admin/Documents/BombingBird/Assets/Plugins/WebSocket/websocket-sharp.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
